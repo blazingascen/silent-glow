@@ -1,59 +1,112 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <title>توهّجٌ هادئ</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>توهّج هادئ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Cairo', sans-serif;
+      background: linear-gradient(to bottom, #1a1a1a, #2c3e50);
+      color: #f0f0f0;
+    }
+    header {
+      background: url('assets/sky-moon.jpg') no-repeat center center;
+      background-size: cover;
+      padding: 80px 20px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.8rem;
+      color: #f1c40f;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.2rem;
+      color: #ecf0f1;
+    }
+    .search-bar {
+      margin: 30px auto;
+      max-width: 500px;
+      text-align: center;
+    }
+    .search-bar input {
+      width: 80%;
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      font-size: 1rem;
+    }
+    section {
+      padding: 40px 20px;
+      text-align: center;
+    }
+    h2 {
+      color: #f0c674;
+      margin-bottom: 30px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .card {
+      background-color: #34495e;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(240, 198, 116, 0.2);
+    }
+    .card h3 {
+      color: #f1c40f;
+      margin-bottom: 10px;
+    }
+    .card p {
+      font-size: 0.95rem;
+      margin-bottom: 10px;
+    }
+    .card a {
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: #f0c674;
+      color: #1a1a1a;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
 
   <header>
-    <h1>🌙 توهّجٌ هادئ</h1>
-    <p>مرحبًا بك في فضاء رقمي يهمس بالسّكينة، حيث تتوهّج الكلمات وتترقص التأملات في سماء من نور.</p>
+    <h1>🌙 توهّج هادئ</h1>
+    <p>مرحبًا بك في فضاء رقمي يهمس بالسكينة، حيث تتوهّج الكلمات وتتراقص التأملات في سماء من نور.</p>
+    <div class="search-bar">
+      <input type="text" placeholder="ابحث عن تأملات أو رموز..." />
+    </div>
   </header>
 
-  <main>
-
-    <section id="about">
-      <h2>عني</h2>
-      <p>
-        أنا نعمان، أبتكر المعنى في الحرف والرمز. أستمع للصمت، وأحوّل السكينة إلى تصميم نابض بالروح.  
-        هذا الفضاء هادئ، لكنه ينبض بالقصص... قصص الشعارات، الشخصيات، وأحلام تنسج بلطف عربي.
-      </p>
-    </section>
-
-    <section id="gallery">
-      <h2>معرض الأعمال</h2>
-      <div class="gallery-grid">
-        <div class="card">
-          <img src="assets/logo1.png" alt="شعار 1">
-          <p>شعار "الضياء العربي" — يستلهم من الخط الكوفي وهندسة الهلال.</p>
-        </div>
-        <div class="card">
-          <img src="assets/logo2.png" alt="شعار 2">
-          <p>شعار "صوت السكون" — يعكس فلسفة الاستماع لما لا يُقال.</p>
-        </div>
+  <section>
+    <h2>✨ أعمال مختارة</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>رمزية "الضياء العربي"</h3>
+        <p>مستوحاة من الخط الكوفي وهندسة الهلال. تصميم يعبّر عن التوازن بين الهوية والنور.</p>
+        <a href="#">اكتشف الآن</a>
       </div>
-    </section>
-
-    <section id="thoughts">
-      <h2>تأملات</h2>
-      <blockquote>
-        "حين يتوهّج الصمت، تولد الكلمات من النور..." 🌌
-      </blockquote>
-    </section>
-
-    <section id="contact">
-      <h2>اتصل بي</h2>
-      <p>يمكنك مراسلتي عبر البريد: <a href="mailto:noaman@example.com">noaman@example.com</a></p>
-    </section>
-
-  </main>
-
-  <footer>
-    <p>© 2025 - جميع الحقوق غير محفوظة. توهّجٌ هادئ يسير بخطى شاعريّة.</p>
-  </footer>
+      <div class="card">
+        <h3>رمزية "صوت السكون"</h3>
+        <p>يعكس فلسفة الاستماع لما لا يُقال، ويحوّل الصمت إلى تصميم ينبض بالروح.</p>
+        <a href="#">اكتشف الآن</a>
+      </div>
+      <div class="card">
+        <h3>رمزية "نور التأمل"</h3>
+        <p>تصميم مستوحى من لحظة تأمل في فجرٍ عربي، حيث يولد المعنى من السكون.</p>
+        <a href="#">اكتشف الآن</a>
+      </div>
+    </div>
+  </section>
 
 </body>
 </html>
