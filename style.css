@@ -1,9 +1,35 @@
-background-image: url('assets/lone-tree.jpg');
 body {
-  background-image: url('lone-tree.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100vh;
+  font-family: 'Arial', sans-serif;
+  direction: rtl;
+  background-color: #fdf6e3;
+  color: #333;
   margin: 0;
+  padding: 0;
+}
+
+header {
+  background-color: #00796b;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+main {
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 30px;
+}
+
+img {
+  max-width: 200px;
+  border-radius: 10px;
+}
+
+footer {
+  background-color: #eee;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.9em;
 }
