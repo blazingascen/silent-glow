@@ -1,81 +1,38 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>صفحتي</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #333;
-    }
-    .hero {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 50px;
-      background: #ffffff;
-      gap: 20px;
-    }
-    .hero-text {
-      max-width: 50%;
-      text-align: right;
-    }
-    .hero-text h1 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
-    }
-    .hero-text p {
-      font-size: 1.2em;
-      margin-bottom: 30px;
-    }
-    .hero-buttons a {
-      display: inline-block;
-      margin-right: 15px;
-      padding: 12px 25px;
-      border-radius: 5px;
-      background: #28a745;
-      color: white;
-      text-decoration: none;
-      font-size: 1em;
-      transition: background 0.3s;
-    }
-    .hero-buttons a:hover {
-      background: #218838;
-    }
-    .hero-image img {
-      max-width: 45%;
-      border-radius: 10px;
-    }
-    @media (max-width: 768px) {
-      .hero {
-        flex-direction: column-reverse;
-        text-align: center;
-      }
-      .hero-text, .hero-image img {
-        max-width: 100%;
-      }
-      .hero-buttons a {
-        margin: 10px 5px;
-      }
-    }
-  </style>
+  <title>موقعي الرمزي</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <section class="hero">
-    <div class="hero-text">
-      <h1>مرحبًا بك في صفحتي</h1>
-      <p>اكتشف محتوى رائع وتواصل بسهولة معي.</p>
-      <div class="hero-buttons">
-        <a href="#">المزيد</a>
-        <a href="#">تواصل معي</a>
-      </div>
-    </div>
-    <div class="hero-image">
-      <img src="https://via.placeholder.com/600x400" alt="صورة جميلة">
-    </div>
-  </section>
+  <header>
+    <h1>ⵣ موقعي الرمزي</h1>
+    <p>فن، فلسفة، وهوية أمازيغية وعربية</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>من أنا؟</h2>
+      <p>أنا نعمان، أدمج بين الفن والرموز والثقافة في تصميماتي الرقمية.</p>
+      <img src="img/profile.png" alt="صورة رمزية" />
+    </section>
+
+    <section>
+      <h2>أعمالي</h2>
+      <ul>
+        <li>تصميم شعارات رمزية</li>
+        <li>فن بيكسل مستوحى من التراث</li>
+        <li>مواقع تفاعلية تجمع بين التقنية والهوية</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 نعمان. جميع الحقوق محفوظة.</p>
+  </footer>
+
+  <script src="main.js"></script>
 </body>
 </html>
