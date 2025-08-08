@@ -33,3 +33,10 @@ footer {
   padding: 10px;
   font-size: 0.9em;
 }
+body {
+  background-image: url("img/background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: white;
+}
