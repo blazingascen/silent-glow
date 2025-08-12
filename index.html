@@ -1,228 +1,305 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>مُرشِح الأفلام الذكي — اختر فيلمك المثالي</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>موقع اقتراح الأفلام بالذكاء الاصطناعي</title>
 <style>
-  :root{
-    --bg1:#0f1724; --bg2:#0b2540; --card:#071227; --accent:#7dd3fc; --accent2:#8b5cf6; --muted:#a7bfd0; --glass:rgba(255,255,255,0.04)
+  @import url('https://fonts.googleapis.com/css2?family=Cairo&display=swap');
+
+  body {
+    margin: 0;
+    font-family: 'Cairo', sans-serif;
+    background: linear-gradient(135deg, #141e30, #243b55);
+    color: #f0f0f0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
   }
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:linear-gradient(135deg,var(--bg1),var(--bg2));color:#eef6ff}
-  .wrap{max-width:1200px;margin:28px auto;padding:20px}
-  header{display:flex;align-items:center;justify-content:space-between;gap:12px}
-  h1{margin:0;font-size:22px;letter-spacing:0.6px}
-  .welcome{font-weight:700;color:var(--accent2);font-size:15px;margin-top:6px}
-  .lead{color:var(--muted);margin-top:6px}
-  .hero{display:flex;gap:14px;margin-top:18px;align-items:center}
-  .hero .left{flex:1}
-  .hero .right{width:420px}
-  .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));padding:16px;border-radius:14px;box-shadow:0 10px 40px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
-  label{display:block;color:var(--muted);font-size:13px;margin-bottom:6px}
-  textarea,input,select,button{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
-  .controls{display:flex;gap:8px;margin-top:10px}
-  .filters{display:flex;gap:8px;align-items:center;margin-top:10px}
-  .tags{display:flex;gap:8px}
-  .tag{padding:8px 12px;border-radius:999px;background:var(--glass);cursor:pointer;color:var(--muted)}
-  .tag.active{background:linear-gradient(90deg,var(--accent),var(--accent2));color:#04293a;font-weight:700}
-  .results{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-top:16px}
-  .movie{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:10px;padding:10px;overflow:hidden;transition:transform .18s ease,box-shadow .18s ease}
-  .movie:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(11,37,61,0.6)}
-  .poster{width:100%;height:360px;object-fit:cover;border-radius:8px;background:#041134}
-  .meta{display:flex;gap:8px;align-items:center;margin-top:8px}
-  .title{font-weight:700}
-  .sub{color:var(--muted);font-size:13px}
-  .muted{color:var(--muted)}
-  .fav{margin-left:auto;background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:18px}
-  .favoritesList{margin-top:12px;display:flex;flex-direction:column;gap:8px}
-  .searchRow{display:flex;gap:8px}
-  .bg-spot{position:absolute;right:-120px;top:-80px;width:420px;height:420px;background:radial-gradient(circle at 30% 20%, rgba(139,92,246,0.18), transparent 20%), radial-gradient(circle at 80% 80%, rgba(125,211,252,0.12), transparent 15%);filter:blur(30px);transform:rotate(10deg);pointer-events:none}
-  footer{margin-top:18px;color:var(--muted);font-size:13px}
-  @media (max-width:980px){.hero{flex-direction:column}.hero .right{width:100%}}
+  header {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  header h1 {
+    font-size: 2.4rem;
+    margin-bottom: 8px;
+    color: #ffdd00;
+    text-shadow: 0 0 15px #ffdd0099;
+  }
+  header p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffaa00cc;
+    letter-spacing: 0.15em;
+    user-select: none;
+  }
+  form {
+    background: rgba(255 255 255 / 0.1);
+    padding: 25px;
+    border-radius: 15px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 0 20px #ffaa0099;
+  }
+  label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  textarea {
+    width: 100%;
+    height: 90px;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    resize: vertical;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    font-family: 'Cairo', sans-serif;
+  }
+  select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    cursor: pointer;
+  }
+  button {
+    width: 100%;
+    padding: 14px;
+    background: #ffaa00;
+    border: none;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #222;
+    transition: background 0.3s ease;
+  }
+  button:hover {
+    background: #ffcc33;
+  }
+  .results {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    justify-content: center;
+    max-width: 900px;
+  }
+  .movie-card {
+    background: rgba(255 255 255 / 0.1);
+    border-radius: 14px;
+    overflow: hidden;
+    width: 180px;
+    box-shadow: 0 0 12px #ffaa0099;
+    transition: transform 0.3s ease;
+  }
+  .movie-card:hover {
+    transform: scale(1.07);
+  }
+  .movie-card img {
+    width: 100%;
+    display: block;
+  }
+  .movie-info {
+    padding: 12px 10px;
+    text-align: center;
+  }
+  .movie-info h3 {
+    font-size: 1.15rem;
+    margin: 0 0 6px;
+    color: #ffdd00;
+    min-height: 44px;
+  }
+  .movie-info p {
+    font-size: 0.9rem;
+    color: #eee;
+    min-height: 54px;
+  }
+  /* Responsive */
+  @media (max-width: 500px) {
+    .movie-card {
+      width: 45vw;
+    }
+    form {
+      padding: 15px;
+    }
+  }
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="bg-spot"></div>
-    <header>
-      <div>
-        <h1>مُرشِح الأفلام الذكي</h1>
-        <div class="welcome">عندي ليك افضل املو دلكركاع الرابعة بتمنمية دريال الاخ بورحيم</div>
-        <div class="lead">أدخل وصفًا لما تريد مشاهدته؛ سأقترح لك أفضل الأفلام (خيال علمي، خيانة) مع أغلفة وصور جذابة.</div>
-      </div>
-      <div class="muted">تجربة سلسة · واجهة جذابة · حفظ المفضلات</div>
-    </header>
 
-    <div class="hero">
-      <div class="left card">
-        <label>الوصف الذي تريده للفيلم</label>
-        <textarea id="desc" placeholder="مثلاً: أريد قصة خيال علمي مظلمة فيها تقنية تتحكم بالعقول" rows="3"></textarea>
+<header>
+  <h1>مرحباً بك في موقع اقتراح الأفلام</h1>
+  <p>عندي ليك افضل املو دلكركاع الرابعة بتمنمية دريال الاخ بورحيم</p>
+</header>
 
-        <div class="tags" style="margin-top:10px">
-          <div class="tag active" id="tagSci">خيال علمي</div>
-          <div class="tag" id="tagBetray">خيانة / دراما</div>
-          <div class="tag" id="tagAny">أي</div>
-        </div>
+<form id="movieForm" autocomplete="off">
+  <label for="description">صف وصف الفيلم الذي تريد مشاهدته (مثلاً: قصة معقدة، مغامرة، خيانة، أكشن، رومانسية ...):</label>
+  <textarea id="description" placeholder="اكتب وصفك هنا..." required></textarea>
 
-        <div class="filters">
-          <div style="flex:1" class="searchRow">
-            <input id="yearMin" placeholder="من سنة (اختياري)" />
-            <input id="yearMax" placeholder="إلى سنة (اختياري)" />
-          </div>
-          <select id="sort">
-            <option value="relevance">الأقرب للوصف</option>
-            <option value="rating">الأعلى تقييماً</option>
-            <option value="year">الأحدث</option>
-          </select>
-        </div>
+  <label for="genre">اختر نوع الفيلم:</label>
+  <select id="genre" required>
+    <option value="">-- اختر نوع الفيلم --</option>
+    <option value="sci-fi">خيال علمي</option>
+    <option value="betrayal">خيانة</option>
+    <option value="action">أكشن</option>
+    <option value="romance">رومانسية</option>
+    <option value="drama">دراما</option>
+    <option value="horror">رعب</option>
+    <option value="comedy">كوميدي</option>
+    <option value="fantasy">فانتازيا</option>
+    <option value="thriller">إثارة</option>
+    <option value="adventure">مغامرة</option>
+    <option value="mystery">غموض</option>
+    <option value="animation">رسوم متحركة</option>
+    <option value="documentary">وثائقي</option>
+  </select>
 
-        <div class="controls">
-          <button id="searchBtn">اقترح أفلام</button>
-          <button id="surpriseBtn">اقترح عشوائي</button>
-          <button id="clearBtn">مسح</button>
-        </div>
+  <button type="submit">اقترح لي الأفلام</button>
+</form>
 
-        <div style="margin-top:12px" class="muted">الصفحة تدعم الربط بمصدر أفلام حقيقي (TMDB) لجلب الأغلفة الحقيقية — اسألني لأدرج كود التكامل.</div>
-
-      </div>
-
-      <div class="right card">
-        <div style="display:flex;align-items:center;gap:10px;justify-content:space-between">
-          <div>
-            <div style="font-weight:700">النتائج المقترحة</div>
-            <div class="muted">انقر على ☆ لإضافة إلى المفضلة، أو على العنوان للبحث السريع عن الفيلم.</div>
-          </div>
-          <div>
-            <input id="quickSearch" placeholder="ابحث داخل النتائج" />
-          </div>
-        </div>
-
-        <div id="results" class="results"></div>
-
-        <h4 style="margin-top:12px">مفضلاتك</h4>
-        <div id="favorites" class="favoritesList muted">لا توجد مفضلات بعد</div>
-
-      </div>
-    </div>
-
-    <footer>تصميم جذاب بالألوان المتدرجة وتفاعل ديناميكي — أستطيع ربط TMDB أو إضافة اختبارات مستخدمين لتحسين الاقتراحات.</footer>
-  </div>
+<div class="results" id="results"></div>
 
 <script>
-// قاعدة بيانات عينّة موسعة
-const MOVIES = [
-  {id:'m1',title:'شفق آلي',year:2029,genres:['خيال علمي'],rating:8.1,keywords:'مستقبل ذكاء اصطناعي مدينة تمرد أخلاقيات',poster:'https://placehold.co/400x600/1f2937/ffffff?text=%D8%B4%D9%81%D9%82+%D8%A2%D9%84%D9%8A'},
-  {id:'m2',title:'خيوط الخيانة',year:2016,genres:['خيانة','دراما'],rating:7.6,keywords:'خيانة صداقة ثقة مؤامرة عائلة',poster:'https://placehold.co/400x600/111827/ffffff?text=%D8%AE%D9%8A%D9%88%D8%B7+%D8%A7%D9%84%D8%AE%D9%8A%D8%A7%D9%86%D8%A9'},
-  {id:'m3',title:'الرحلة إلى أوربيس',year:2041,genres:['خيال علمي','مغامرة'],rating:8.7,keywords:'فضاء مستعمرات مخاطر اكتشاف بقاء',poster:'https://placehold.co/400x600/0b3d91/ffffff?text=%D8%A7%D9%84%D8%B1%D8%AD%D9%84%D8%A9+%D8%A5%D9%84%D9%89+%D8%A3%D9%88%D8%B1%D8%A8%D9%8A%D8%B3'},
-  {id:'m4',title:'حافة الثقة',year:2005,genres:['خيانة','جريمة'],rating:7.9,keywords:'سر خيانة عميل مزدوج تشويق',poster:'https://placehold.co/400x600/2d2d2d/ffffff?text=%D8%AD%D8%A7%D9%81%D8%A9+%D8%A7%D9%84%D8%AB%D9%82%D8%A9'},
-  {id:'m5',title:'كود النور',year:2018,genres:['خيال علمي','تشويق'],rating:7.4,keywords:'اختراق نظام ذكاء مستقبل أمن',poster:'https://placehold.co/400x600/083344/ffffff?text=%D9%83%D9%88%D8%AF+%D8%A7%D9%84%D9%86%D9%88%D8%B1'},
-  {id:'m6',title:'قلب خائن',year:1999,genres:['خيانة','رومانسي'],rating:7.0,keywords:'حب خيانة خيبة علاقة',poster:'https://placehold.co/400x600/5b1238/ffffff?text=%D9%82%D9%84%D8%A8+%D8%AE%D8%A7%D8%A6%D9%86'},
-  {id:'m7',title:'سياسة الزمن',year:2035,genres:['خيال علمي','دراما'],rating:8.3,keywords:'سفر عبر الزمن عواقب خيال علمي سياسة',poster:'https://placehold.co/400x600/154360/ffffff?text=%D8%B3%D9%8A%D8%A7%D8%B3%D8%A9+%D8%A7%D9%84%D8%B2%D9%85%D9%86'},
-  {id:'m8',title:'شيفرة الخيانة',year:2022,genres:['خيانة','تشويق'],rating:8.0,keywords:'مؤامرة مخاطر خيانة تحقيق',poster:'https://placehold.co/400x600/2b6cb0/ffffff?text=%D8%B4%D9%8A%D9%81%D8%B1%D8%A9+%D8%A7%D9%84%D8%AE%D9%8A%D8%A7%D9%86%D8%A9'},
-  {id:'m9',title:'حدود الآلة',year:2012,genres:['خيال علمي'],rating:7.8,keywords:'روبوت وعي مستقبل صراع',poster:'https://placehold.co/400x600/0b2540/ffffff?text=%D8%AD%D8%AF%D9%88%D8%AF+%D8%A7%D9%84%D8%A2%D9%84%D8%A9'},
-  {id:'m10',title:'مدينة الأسرار',year:2008,genres:['خيانة','تشويق'],rating:7.2,keywords:'جريمة خيانة سر مدينة',poster:'https://placehold.co/400x600/3b3b98/ffffff?text=%D9%85%D8%AF%D9%8A%D9%86%D8%A9+%D8%A7%D9%84%D8%A3%D8%B3%D8%B1%D8%A7%D8%B1'}
-];
+  const movies = [
+    {
+      title: "Inception",
+      genres: ["sci-fi", "thriller", "mystery"],
+      description: "رحلة في عالم الأحلام مع قصة معقدة وخيانة",
+      image: "https://m.media-amazon.com/images/I/51v5ZpFyaFL._AC_SY679_.jpg"
+    },
+    {
+      title: "Interstellar",
+      genres: ["sci-fi", "drama", "adventure"],
+      description: "رحلة فضائية لإنقاذ البشرية مع تفاصيل علمية عميقة",
+      image: "https://m.media-amazon.com/images/I/71niXI3lxlL._AC_SY679_.jpg"
+    },
+    {
+      title: "The Prestige",
+      genres: ["betrayal", "drama", "mystery"],
+      description: "صراع بين ساحرين مليء بالخيانة والغموض",
+      image: "https://m.media-amazon.com/images/I/51uZMJwW4JL._AC_SY679_.jpg"
+    },
+    {
+      title: "Gone Girl",
+      genres: ["betrayal", "thriller", "mystery"],
+      description: "قصة خيانة وزواج مليئة بالأحداث المفاجئة",
+      image: "https://m.media-amazon.com/images/I/51v5ZpFyaFL._AC_SY679_.jpg"
+    },
+    {
+      title: "Blade Runner 2049",
+      genres: ["sci-fi", "drama", "thriller"],
+      description: "مستقبل مظلم مع خيانة وصراعات بين البشر والآلات",
+      image: "https://m.media-amazon.com/images/I/71pHCWnj5QL._AC_SY679_.jpg"
+    },
+    {
+      title: "The Departed",
+      genres: ["betrayal", "drama", "thriller"],
+      description: "قصة جريمة وخيانة في عالم المافيا",
+      image: "https://m.media-amazon.com/images/I/51gExxlNlgL._AC_SY679_.jpg"
+    },
+    {
+      title: "The Matrix",
+      genres: ["sci-fi", "action", "thriller"],
+      description: "مقاتل يحاول كشف الحقيقة في عالم افتراضي",
+      image: "https://m.media-amazon.com/images/I/51vpnbwFHrL._AC_SY679_.jpg"
+    },
+    {
+      title: "Mad Max: Fury Road",
+      genres: ["action", "adventure", "sci-fi"],
+      description: "رحلة ملحمية في عالم ما بعد الكارثة مع الكثير من الأكشن",
+      image: "https://m.media-amazon.com/images/I/81n6tU95VPL._AC_SY679_.jpg"
+    },
+    {
+      title: "Her",
+      genres: ["romance", "sci-fi", "drama"],
+      description: "رجل يقع في حب نظام تشغيل ذكي للغاية",
+      image: "https://m.media-amazon.com/images/I/71K6TnD6ufL._AC_SY679_.jpg"
+    },
+    {
+      title: "Parasite",
+      genres: ["drama", "thriller", "betrayal"],
+      description: "دراما اجتماعية عن طبقات المجتمع مع خيانة غير متوقعة",
+      image: "https://m.media-amazon.com/images/I/91Uk8Pi1mvL._AC_SY679_.jpg"
+    }
+  ];
 
-// مساعدة: حساب درجة الصلة
-function scoreMovie(movie, desc, activeTags, yearMin, yearMax){
-  const text = (movie.title + ' ' + movie.keywords + ' ' + movie.genres.join(' ')).toLowerCase();
-  const terms = desc.toLowerCase().split(/\s+/).filter(Boolean);
-  let score = 0;
-  terms.forEach(t=>{ if(text.includes(t)) score += 1; });
-  // تفضيل النوع
-  if(activeTags.length > 0){
-    const matchedGenres = activeTags.filter(g=> movie.genres.map(x=>x.toLowerCase()).includes(g.toLowerCase()));
-    score += matchedGenres.length * 3;
+  // دالة بسيطة لتحليل النص: تقسيم الكلمات، إزالة الكلمات القصيرة، وتحويلها لمجموعة
+  function extractKeywords(text) {
+    return text
+      .toLowerCase()
+      .replace(/[.,!؟]/g, '')
+      .split(/\s+/)
+      .filter(word => word.length > 2);
   }
-  if(yearMin && movie.year < yearMin) score -= 1;
-  if(yearMax && movie.year > yearMax) score -= 1;
-  score += Math.max(0, (movie.rating - 6) * 0.3);
-  return score;
-}
 
-function getActiveTags(){
-  const arr = [];
-  if(document.getElementById('tagSci').classList.contains('active')) arr.push('خيال علمي');
-  if(document.getElementById('tagBetray').classList.contains('active')) arr.push('خيانة');
-  if(document.getElementById('tagAny').classList.contains('active')) return [];
-  return arr;
-}
+  const form = document.getElementById('movieForm');
+  const resultsDiv = document.getElementById('results');
 
-function renderResults(list){
-  const container = document.getElementById('results'); container.innerHTML = '';
-  if(list.length === 0) { container.innerHTML = '<div class="muted">لم أجد أفلاماً تطابق الوصف — جرّب وصفًا أوسع أو اضغط اقتراح عشوائي.</div>'; return; }
-  list.forEach(m=>{
-    const el = document.createElement('div'); el.className='movie';
-    el.innerHTML = `
-      <img loading="lazy" class="poster" src="${m.poster}" alt="${m.title} poster"/>
-      <div class="meta">
-        <div style="flex:1">
-          <div class="title link">${m.title}</div>
-          <div class="sub">${m.year} · ⭐ ${m.rating}</div>
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    resultsDiv.innerHTML = '';
+
+    const desc = document.getElementById('description').value.trim();
+    const genre = document.getElementById('genre').value;
+
+    if (!desc || !genre) {
+      alert('يرجى كتابة الوصف واختيار النوع!');
+      return;
+    }
+
+    const keywords = extractKeywords(desc);
+
+    // خوارزمية ذكاء اصطناعي مبسطة: حساب مدى تطابق الكلمات المفتاحية في الوصف مع وصف الفيلم
+    function scoreMovie(movie) {
+      let score = 0;
+
+      // زيادة نقاط إذا النوع موجود في الأنواع
+      if (movie.genres.includes(genre)) score += 3;
+
+      // كلمات مفتاحية موجودة في الوصف
+      const movieDescWords = extractKeywords(movie.description);
+
+      keywords.forEach(k => {
+        if (movieDescWords.includes(k)) score += 2;
+        if (movie.title.toLowerCase().includes(k)) score += 1;
+      });
+
+      return score;
+    }
+
+    const scoredMovies = movies
+      .map(movie => ({ movie, score: scoreMovie(movie) }))
+      .filter(m => m.score > 0)
+      .sort((a, b) => b.score - a.score);
+
+    if (scoredMovies.length === 0) {
+      resultsDiv.innerHTML = `<p style="color:#ffaa00; font-weight:bold; font-size:1.1rem;">عذرًا، لم نعثر على أفلام تطابق وصفك.</p>`;
+      return;
+    }
+
+    // عرض النتائج
+    scoredMovies.forEach(({ movie }) => {
+      const card = document.createElement('div');
+      card.className = 'movie-card';
+      card.innerHTML = `
+        <img src="${movie.image}" alt="غلاف ${movie.title}" />
+        <div class="movie-info">
+          <h3>${movie.title}</h3>
+          <p>${movie.description}</p>
         </div>
-        <button class="fav">☆</button>
-      </div>
-      <div class="muted">${m.genres.join('، ')}</div>
-      <div class="muted" style="margin-top:6px">${m.keywords.split(' ').slice(0,10).join(' · ')}</div>
-    `;
-    // أحداث
-    el.querySelector('.title').addEventListener('click', ()=>{ window.open('https://www.google.com/search?q='+encodeURIComponent(m.title+' فيلم'), '_blank'); });
-    el.querySelector('.fav').addEventListener('click', ()=>{ toggleFav(m); });
-    container.appendChild(el);
+      `;
+      resultsDiv.appendChild(card);
+    });
   });
-}
-
-function search(){
-  const desc = document.getElementById('desc').value.trim();
-  const yearMin = parseInt(document.getElementById('yearMin').value) || null;
-  const yearMax = parseInt(document.getElementById('yearMax').value) || null;
-  const sort = document.getElementById('sort').value;
-  const activeTags = getActiveTags();
-
-  // حساب الدرجات
-  const scored = MOVIES.map(m=> ({...m, score: scoreMovie(m, desc || m.keywords, activeTags, yearMin, yearMax)}));
-  let filtered = scored.filter(m=> m.score > 0);
-  if(filtered.length === 0){ // توسيع البحث
-    filtered = scored.slice().sort((a,b)=> b.rating - a.rating).slice(0,8);
-  }
-  if(sort === 'relevance') filtered.sort((a,b)=> b.score - a.score || b.rating - a.rating);
-  if(sort === 'rating') filtered.sort((a,b)=> b.rating - a.rating);
-  if(sort === 'year') filtered.sort((a,b)=> b.year - a.year);
-  renderResults(filtered.slice(0,16));
-}
-
-function surprise(){
-  // اقتراح عشوائي من الأعلى تقييماً
-  const arr = MOVIES.slice().sort((a,b)=> b.rating - a.rating).slice(0,6);
-  renderResults(arr);
-}
-
-// مفضلات
-function loadFavs(){ return JSON.parse(localStorage.getItem('movie_favs')||'[]'); }
-function saveFavs(arr){ localStorage.setItem('movie_favs', JSON.stringify(arr)); renderFavs(); }
-function toggleFav(movie){ const arr = loadFavs(); const exists = arr.find(x=> x.id===movie.id); if(exists){ const nf = arr.filter(x=> x.id!==movie.id); saveFavs(nf); alert('أزيل من المفضلة'); } else { arr.unshift(movie); saveFavs(arr); alert('أضيف إلى المفضلة'); } }
-function renderFavs(){ const el = document.getElementById('favorites'); const f = loadFavs(); if(f.length === 0){ el.innerHTML = 'لا توجد مفضلات بعد'; return; } el.innerHTML = f.map(m=> `<div style="display:flex;align-items:center;gap:8px"><img src="${m.poster}" style="width:44px;height:66px;object-fit:cover;border-radius:6px"/><div><strong>${m.title}</strong><div class="muted">${m.year} · ⭐ ${m.rating}</div></div></div>`).join(''); }
-
-// تهيئة أحداث
-document.getElementById('searchBtn').addEventListener('click', search);
-document.getElementById('surpriseBtn').addEventListener('click', surprise);
-document.getElementById('clearBtn').addEventListener('click', ()=>{ document.getElementById('desc').value=''; document.getElementById('results').innerHTML=''; });
-
-// تفعيل الوسوم
-['tagSci','tagBetray','tagAny'].forEach(id=> document.getElementById(id).addEventListener('click', e=>{ document.getElementById('tagSci').classList.remove('active'); document.getElementById('tagBetray').classList.remove('active'); document.getElementById('tagAny').classList.remove('active'); e.target.classList.add('active'); }));
-
-// بحث سريع داخل النتائج
-document.getElementById('quickSearch').addEventListener('input', e=>{
-  const q = e.target.value.trim().toLowerCase(); const all = Array.from(document.querySelectorAll('.movie')); all.forEach(m=>{ const t = m.innerText.toLowerCase(); m.style.display = t.includes(q) ? '' : 'none'; });
-});
-
-// اختصار لوحة المفاتيح
-window.addEventListener('keydown', e=>{ if(e.key.toLowerCase()==='g'){ search(); } if(e.key.toLowerCase()==='s'){ surprise(); } });
-
-// تحميل مبدئي
-renderFavs(); renderResults(MOVIES.slice(0,6));
-
 </script>
+
 </body>
 </html>
