@@ -1,38 +1,296 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>موقعي الرمزي</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>مولد الأفكار والابتكار</title>
+<style>
+  :root{--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--accent:#6ee7b7;--glass:rgba(255,255,255,0.03)}
+  html,body{height:100%;margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;direction:rtl;background:linear-gradient(180deg,#071029 0%,#081620 60%);color:#e6eef6}
+  .wrap{max-width:1100px;margin:28px auto;padding:20px}
+  header{display:flex;gap:12px;align-items:center;justify-content:space-between}
+  h1{margin:0;font-size:20px}
+  p.lead{margin:6px 0 0;color:var(--muted)}
+  .grid{display:grid;grid-template-columns:1fr 380px;gap:18px;margin-top:18px}
+  .card{background:var(--card);padding:14px;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.6)}
+  label{display:block;font-size:13px;margin-bottom:6px;color:var(--muted)}
+  input,select,textarea,button{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;box-sizing:border-box}
+  .row{display:flex;gap:10px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .tag{padding:6px 8px;border-radius:999px;background:var(--glass);font-size:13px;cursor:pointer}
+  .tag.active{background:linear-gradient(90deg,#2dd4bf33,#60a5fa22);border:1px solid rgba(255,255,255,0.03)}
+  .ideas{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+  .idea{padding:10px;border-radius:8px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid rgba(255,255,255,0.03)}
+  .controls{display:flex;gap:8px;margin-top:12px}
+  .controls button{cursor:pointer}
+  .small{font-size:13px;color:var(--muted)}
+  footer{margin-top:18px;color:var(--muted);font-size:13px}
+  .right-col{position:relative}
+  .favorites{max-height:360px;overflow:auto}
+  .chip{display:inline-flex;gap:8px;align-items:center;padding:6px 8px;border-radius:10px;background:#071726}
+  .download{margin-top:8px}
+  @media (max-width:900px){.grid{grid-template-columns:1fr;}.right-col{order:-1}}
+</style>
 </head>
 <body>
-  <header>
-    <h1>ⵣ موقعي الرمزي</h1>
-    <p>فن، فلسفة، وهوية أمازيغية وعربية</p>
-  </header>
+  <div class="wrap">
+    <header>
+      <div>
+        <h1>مولد الأفكار والابتكار</h1>
+        <p class="lead">احصل على أفكار سريعة قابلة للتطوير — موجه للمبدعين، الفرق، والمشروعات الصغيرة.</p>
+      </div>
+      <div class="small">نسخة تفاعلية — احفظ الأفكار في المتصفح أو حمّلها كنص.</div>
+    </header>
 
-  <main>
-    <section>
-      <h2>من أنا؟</h2>
-      <p>أنا نعمان، أدمج بين الفن والرموز والثقافة في تصميماتي الرقمية.</p>
-      <img src="img/profile.png" alt="صورة رمزية" />
-    </section>
+    <div class="grid">
+      <div class="card">
+        <label>كلمة/موضوع البداية (اختياري)</label>
+        <input id="seed" placeholder="مثلاً: تعليم، زراعة، ترفيه، سيارة كهربائية" />
 
-    <section>
-      <h2>أعمالي</h2>
-      <ul>
-        <li>تصميم شعارات رمزية</li>
-        <li>فن بيكسل مستوحى من التراث</li>
-        <li>مواقع تفاعلية تجمع بين التقنية والهوية</li>
-      </ul>
-    </section>
-  </main>
+        <label style="margin-top:12px">اختر فئة / أسلوب</label>
+        <div class="tags" id="categoryTags">
+          <div class="tag active" data-val="منتج">منتج</div>
+          <div class="tag" data-val="خدمة">خدمة</div>
+          <div class="tag" data-val="تجربة">تجربة</div>
+          <div class="tag" data-val="تطبيق">تطبيق</div>
+          <div class="tag" data-val="مجتمع">مجتمع</div>
+          <div class="tag" data-val="تحسين">تحسين</div>
+        </div>
 
-  <footer>
-    <p>© 2025 نعمان. جميع الحقوق محفوظة.</p>
-  </footer>
+        <label style="margin-top:12px">تقنيات عصف ذهني (اختياري)</label>
+        <select id="method">
+          <option value="random">سريع عشوائي</option>
+          <option value="scamper">SCAMPER (استبدال/تركيب/...) </option>
+          <option value="howmightwe">How might we</option>
+          <option value="roleplay">تمثيل دور</option>
+        </select>
 
-  <script src="main.js"></script>
+        <label style="margin-top:12px">قيود/معيّنات (اختياري)</label>
+        <input id="constraints" placeholder="مثلاً: ميزانية منخفضة، صديق للبيئة، للمراهقين" />
+
+        <div class="controls">
+          <button id="genBtn">توليد 6 أفكار</button>
+          <button id="moreBtn">توليد أكثر</button>
+          <button id="clearBtn">مسح</button>
+        </div>
+
+        <div class="small" style="margin-top:8px">اختصارات: <strong>G</strong> توليد — <strong>C</strong> نسخ الكل — <strong>S</strong> حفظ المفضلة</div>
+
+        <div class="ideas" id="ideasList" aria-live="polite"></div>
+
+        <div style="margin-top:10px" class="row">
+          <button id="copyBtn">نسخ الأفكار</button>
+          <button id="downloadBtn" class="download">تحميل TXT</button>
+          <button id="exportJson">تصدير JSON</button>
+        </div>
+
+      </div>
+
+      <div class="right-col">
+        <div class="card">
+          <h3>المفضلة / المحفوظات</h3>
+          <div class="favorites" id="favorites"></div>
+          <div style="margin-top:10px" class="row">
+            <button id="saveFav">حفظ المفضلة</button>
+            <button id="clearFav">مسح المفضلة</button>
+          </div>
+
+          <h4 style="margin-top:12px">تلميحات للابتكار</h4>
+          <ul class="small">
+            <li>ابدأ من مشكلة حقيقية ثم ابحث عن حلول بسيطة.</li>
+            <li>استعمل قيودًا لتوليد أفكار غير متوقعة.</li>
+            <li>ادمج أفكارًا من مجالات مختلفة (قانون المنهج العرضي).</li>
+          </ul>
+
+          <h4 style="margin-top:10px">مشاركة</h4>
+          <div class="small">يمكنك إرسال الأفكار عبر البريد أو نسخها بسرعة للمشاركة.</div>
+          <div style="margin-top:8px" class="row">
+            <button id="mailtoBtn">مشاركة بالبريد</button>
+            <button id="tweetBtn">مشاركة (نسخ)</button>
+          </div>
+
+        </div>
+
+        <div class="card" style="margin-top:12px">
+          <h4>لوحة إعدادات سريعة</h4>
+          <label>عدد الأفكار الافتراضي</label>
+          <input id="count" value="6" />
+
+          <label style="margin-top:8px">درجة العشوائية</label>
+          <select id="creativity">
+            <option value="low">منخفضة (محافظ)</option>
+            <option value="medium" selected>متوسطة</option>
+            <option value="high">عالية (مجازفة)</option>
+          </select>
+        </div>
+      </div>
+
+    </div>
+
+    <footer>
+      تم الإنشاء — مولد أفكار بسيط يعمل دون اتصال. يتم حفظ المفضلة في متصفحك (localStorage).
+    </footer>
+  </div>
+
+<script>
+// عناصر
+const seedEl = document.getElementById('seed');
+const methodEl = document.getElementById('method');
+const constraintsEl = document.getElementById('constraints');
+const genBtn = document.getElementById('genBtn');
+const moreBtn = document.getElementById('moreBtn');
+const ideasList = document.getElementById('ideasList');
+const copyBtn = document.getElementById('copyBtn');
+const downloadBtn = document.getElementById('downloadBtn');
+const exportJson = document.getElementById('exportJson');
+const favoritesEl = document.getElementById('favorites');
+const saveFav = document.getElementById('saveFav');
+const clearFav = document.getElementById('clearFav');
+const categoryTags = document.getElementById('categoryTags');
+const countEl = document.getElementById('count');
+const creativityEl = document.getElementById('creativity');
+const clearBtn = document.getElementById('clearBtn');
+const mailtoBtn = document.getElementById('mailtoBtn');
+const tweetBtn = document.getElementById('tweetBtn');
+
+// إدارة الفئات
+categoryTags.addEventListener('click', e=>{
+  const t = e.target.closest('.tag'); if(!t) return;
+  t.classList.toggle('active');
+});
+
+// بيانات مساعد بسيطة
+const verbs = ['إعادة تصميم','دمج','تصغير','توسيع','تحويل','أتمتة','تبسيط','ابتكار','تقليل التكلفة لـ','تجربة'];
+const objects = ['تجربة المستخدم','خدمة توصيل','منصة تعليمية','منتج منزلي','تطبيقة جوال','حل بيئي','محتوى تفاعلي','آلية زراعية','أداة مساعدة'];
+const markets = ['للمراهقين','للشركات الصغيرة','للأمهات','للمعلمين','لسكان المدن','لسوق الشرق الأوسط','لعالم الألعاب','لقطاع الصحة'];
+
+function getActiveCategories(){
+  return Array.from(document.querySelectorAll('#categoryTags .tag.active')).map(t=>t.dataset.val);
+}
+
+function pickRandom(arr){return arr[Math.floor(Math.random()*arr.length)];}
+
+function createIdea(seed, method, constraints, creativity){
+  // ذكاء توليدي بسيط يعتمد على القوالب
+  const cat = getActiveCategories().join(', ') || 'عام';
+  let template = '';
+  if(method === 'scamper'){
+    template = `${pickRandom(verbs)} ${seed || pickRandom(objects)} ${constraints? 'مع شرط: '+constraints : ''} — فئة: ${cat}`;
+  } else if(method === 'howmightwe'){
+    template = `كيف يمكننا أن ن${seed? ' '+seed : ' '+pickRandom(objects)} بحيث ${constraints || 'مفيدة و قابلة للتنفيذ'}؟ — فئة: ${cat}`;
+  } else if(method === 'roleplay'){
+    template = `من منظور ${pickRandom(markets)}, فكيف ستكون ${seed || pickRandom(objects)}؟ (قابل للتخصيص)`;
+  } else {
+    // random
+    const part1 = pickRandom(verbs);
+    const part2 = seed || pickRandom(objects);
+    const part3 = pickRandom(markets);
+    template = `${part1} ${part2} ${part3}${constraints? ' — قيد: '+constraints : ''} — فئة: ${cat}`;
+  }
+
+  // تضخيم الخيال بحسب مستوى الإبداع
+  if(creativity === 'high'){
+    template += ' — فكرة جريئة: جرب نموذج عمل freemium مع AR';
+  } else if(creativity === 'low'){
+    template += ' — ملاحظة: حل بسيط وقابل للتنفيذ خلال أسبوعين.';
+  }
+
+  return template;
+}
+
+function generate(n=6){
+  const seed = seedEl.value.trim();
+  const method = methodEl.value;
+  const constraints = constraintsEl.value.trim();
+  const creativity = creativityEl.value;
+
+  const out = [];
+  for(let i=0;i<n;i++){
+    out.push(createIdea(seed, method, constraints, creativity));
+  }
+  return out;
+}
+
+function renderIdeas(arr, append=false){
+  if(!append) ideasList.innerHTML = '';
+  arr.forEach(text=>{
+    const div = document.createElement('div'); div.className='idea';
+    div.innerHTML = `<div>${text}</div><div style="margin-top:6px" class="row"><button class="favBtn">☆</button><button class="copyOne">نسخ</button></div>`;
+    ideasList.appendChild(div);
+  });
+}
+
+// فعاليات الأزرار
+genBtn.addEventListener('click', ()=>{ const n = parseInt(countEl.value)||6; renderIdeas(generate(n)); });
+moreBtn.addEventListener('click', ()=>{ const n = parseInt(countEl.value)||6; renderIdeas(generate(n), true); });
+clearBtn.addEventListener('click', ()=>{ ideasList.innerHTML=''; });
+
+copyBtn.addEventListener('click', ()=>{
+  const text = Array.from(document.querySelectorAll('.idea')).map(d=>d.textContent.trim()).join('\n\n');
+  navigator.clipboard.writeText(text).then(()=>alert('نُسخت الأفكار إلى الحافظة'));
+});
+
+downloadBtn.addEventListener('click', ()=>{
+  const text = Array.from(document.querySelectorAll('.idea')).map(d=>d.textContent.trim()).join('\n\n');
+  const blob = new Blob([text],{type:'text/plain;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href=url; a.download='ideas.txt'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+});
+
+exportJson.addEventListener('click', ()=>{
+  const arr = Array.from(document.querySelectorAll('.idea')).map(d=>d.textContent.trim());
+  const blob = new Blob([JSON.stringify({ideas:arr},null,2)],{type:'application/json'});
+  const url = URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download='ideas.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+});
+
+// تعامل مع أزرار داخل كل فكرة (delegate)
+ideasList.addEventListener('click', e=>{
+  if(e.target.classList.contains('favBtn')){
+    const text = e.target.closest('.idea').firstChild.textContent.trim(); addToFavorites(text);
+  }
+  if(e.target.classList.contains('copyOne')){
+    const text = e.target.closest('.idea').firstChild.textContent.trim(); navigator.clipboard.writeText(text).then(()=>alert('نُسخت الفكرة'));
+  }
+});
+
+// المفضلة
+function loadFav(){
+  const raw = localStorage.getItem('idea_favs');
+  return raw? JSON.parse(raw): [];
+}
+function saveFavs(arr){ localStorage.setItem('idea_favs', JSON.stringify(arr)); renderFavs(); }
+function addToFavorites(text){ const arr=loadFav(); if(!arr.includes(text)) arr.unshift(text); saveFavs(arr); alert('أضيفت للمفضلة'); }
+function renderFavs(){ const arr=loadFav(); favoritesEl.innerHTML=''; arr.forEach((t,i)=>{
+  const d = document.createElement('div'); d.className='chip'; d.innerHTML = `<span style="flex:1">${t}</span><button data-i="${i}" class="removeFav">✖</button>`; favoritesEl.appendChild(d);
+}); }
+
+favoritesEl.addEventListener('click', e=>{ if(e.target.classList.contains('removeFav')){ const i = parseInt(e.target.dataset.i); const arr=loadFav(); arr.splice(i,1); saveFavs(arr); }});
+
+saveFav.addEventListener('click', ()=>{
+  const arr = Array.from(document.querySelectorAll('.idea')).map(d=>d.textContent.trim()); const favs = loadFav(); const merged = Array.from(new Set([...arr,...favs])); saveFavs(merged); alert('تم حفظ الأفكار في المفضلة');
+});
+clearFav.addEventListener('click', ()=>{ if(confirm('مسح جميع المفضلة؟')){ localStorage.removeItem('idea_favs'); renderFavs(); }});
+
+// المشاركة
+mailtoBtn.addEventListener('click', ()=>{
+  const body = encodeURIComponent(Array.from(document.querySelectorAll('.idea')).map(d=>d.textContent.trim()).join('\n\n'));
+  location.href = `mailto:?subject=${encodeURIComponent('أفكار جديدة')}&body=${body}`;
+});
+tweetBtn.addEventListener('click', ()=>{ const text = Array.from(document.querySelectorAll('.idea')).map(d=>d.textContent.trim()).join('\n\n'); navigator.clipboard.writeText(text).then(()=>alert('تم نسخ النص للمشاركة'));
+});
+
+// تصفح سريع و اختصارات
+window.addEventListener('keydown', e=>{
+  if(e.key.toLowerCase()==='g') genBtn.click();
+  if(e.key.toLowerCase()==='c') copyBtn.click();
+  if(e.key.toLowerCase()==='s') saveFav.click();
+});
+
+// تحسينات عرضية — عند التحميل
+renderFavs();
+// توليد عينة أولية
+renderIdeas(generate(4));
+
+</script>
 </body>
 </html>
